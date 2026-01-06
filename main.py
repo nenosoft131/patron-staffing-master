@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
-from api.routers import user
-from core.config import get_settings
+from app.api.routers import user
+from app.core.config import get_settings
 
 def create_app() -> FastAPI:
     settings = get_settings()  # Loads .env, validates config

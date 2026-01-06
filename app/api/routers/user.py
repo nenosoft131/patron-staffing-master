@@ -1,7 +1,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException
-from utils.dependencies import get_create_user_use_case
-from utils.create_user import CreateUser, CreateUserInput
+from app.api.utils.dependencies import get_create_user_use_case
+from app.api.utils.create_user import CreateUser, CreateUserInput
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
