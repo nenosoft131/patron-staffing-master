@@ -11,7 +11,7 @@ class UserORM(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)  # ← note: "hashed_password", not "password_hash"
+    hashed_password = Column(String, nullable=False)
     first_name = Column(String, nullable=True)
     last_name = Column(String, nullable=True)
     role = Column(Enum(UserRole), nullable=False, default=UserRole.candidate)

@@ -7,12 +7,13 @@ from app.models.user_orm_model import UserORM  # SQLAlchemy model
 class UserSQLAlchemyRepository(IUserRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
-
+        
     async def get_by_email(self, email: str) -> DomainUser | None:
         stmt = select(UserORM).where(UserORM.email == email)
         result = await self.session.execute(stmt)
         orm_user = result.scalar_one_or_none()  # returns single UserORM or None
         return self._to_domain(orm_user) if orm_user else None
+    
 
     async def create(self, user: DomainUser) -> DomainUser:
         orm_user = UserORM(
