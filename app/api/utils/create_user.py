@@ -37,7 +37,7 @@ class CreateUser:
         # 🧠 Create domain entity
         domain_user = User(
             email=input.email,
-            password_hash=input.password,  # unused — replaced by hash
+            # password_hash=input.password,  # unused — replaced by hash
             password_hash=hashed,
             first_name=input.first_name,
             last_name=input.last_name,

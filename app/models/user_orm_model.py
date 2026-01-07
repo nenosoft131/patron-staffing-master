@@ -19,14 +19,3 @@ class UserORM(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    # Optional: helper to convert to DomainUser
-    def to_domain(self) -> "DomainUser":
-        from app.domain.models.user import DomainUser  # avoid circular import
-        return DomainUser(
-            email=self.email,
-            password_hash=self.hashed_password,  # map DB field → domain field
-            first_name=self.first_name,
-            last_name=self.last_name,
-            role=self.role,
-            is_active=self.is_active,
-        )

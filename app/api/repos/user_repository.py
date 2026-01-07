@@ -1,17 +1,17 @@
-# Adapter — implements port using SQLAlchemy
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.interfaces.user_repository import IUserRepository
 from app.models.user import User as DomainUser
-from app.models.user import UserORM  # SQLAlchemy model
+from app.models.user_orm_model import UserORM  # SQLAlchemy model
 
 class UserSQLAlchemyRepository(IUserRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
 
     async def get_by_email(self, email: str) -> DomainUser | None:
-        orm_user = await self.session.scalar(
-            # select(UserORM).where(UserORM.email == email)
-        )
+        stmt = select(UserORM).where(UserORM.email == email)
+        result = await self.session.execute(stmt)
+        orm_user = result.scalar_one_or_none()  # returns single UserORM or None
         return self._to_domain(orm_user) if orm_user else None
 
     async def create(self, user: DomainUser) -> DomainUser:

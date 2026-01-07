@@ -10,7 +10,7 @@ class UserRole(str, Enum):
     staff = "staff"        # internal agent
 
 @dataclass(frozen=True)  # immutable: safe for domain logic
-class DomainUser:
+class User:
     email: str
     password_hash: Optional[str] = str
     first_name: Optional[str] = None
