@@ -1,4 +1,4 @@
-# Patron Staffing API
+# Patron Staffing
 
 ![FastAPI](https://img.shields.io/badge/FastAPI-Production-green)
 ![Python](https://img.shields.io/badge/Python-3.9-blue)
@@ -32,9 +32,7 @@ Built with **FastAPI**, **async SQLAlchemy**, and cloud-ready storage for high p
 ## 🏗️ Architecture
 
 patron-staffing-master/<br>
-
-├ app/ # Core application<br>│ ├ api/ # FastAPI routers, schemas, and dependency injection<br>│ ├ core/ # Core business logic & app configuration<br>
-│ ├ domain/ # Pure business entities<br>
+-app/ # Core application<br>-api/ # FastAPI routers, schemas, and dependency injection<br>-core/ # Core business logic & app configuration<br>-domain/ # Pure business entities<br>
 │ │ └ models/ # Domain models<br>
 │ ├ infrastructure/ # Adapters & external service implementations<br>
 │ │ ├ repositories/ # Database repository implementations<br>
