@@ -1,4 +1,4 @@
-from app.models.user import User
+from app.domain.models.user import User
 from app.infrastructure.repositories.user_repository import IUserRepository
 from app.infrastructure.security.password_hasher import IPasswordHasher
 from app.api.schemas.user import CreateUserInput, CreateUserOutput
@@ -18,7 +18,6 @@ class CreateUser:
         existing = await self.user_repo.get_by_email(input.email)
         if existing:
             raise ValueError("Email already registered")
-
         # 🔐 Hash password
         hashed = self.password_hasher.hash(input.password)
         # 🧠 Create domain entity

@@ -5,14 +5,14 @@ from typing import Optional
 
 class UserRole(str, Enum):
     admin = "admin"
-    client = "client"      # e.g., hiring company
+    client = "client"      # e.g., hiring company HR
     candidate = "candidate"  # job seeker
-    staff = "staff"        # internal agent
+    staff = "staff"        # internal staffing agent
 
-@dataclass(frozen=True)  # immutable: safe for domain logic
+@dataclass(frozen=True)
 class User:
     email: str
-    password_hash: Optional[str] = str
+    password_hash: str  
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     role: UserRole = UserRole.candidate

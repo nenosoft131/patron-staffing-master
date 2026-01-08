@@ -1,10 +1,8 @@
 # adapters/database/models/user.py
 from sqlalchemy import Column, Integer, String, Enum, Boolean, DateTime
 from sqlalchemy.sql import func
-from sqlalchemy.orm import declarative_base
-from app.models.user import UserRole  # reuse domain enum!
-
-Base = declarative_base()
+from app.database.models.base import Base
+from app.domain.models.user import UserRole  # reuse domain enum!
 
 class UserORM(Base):
     __tablename__ = "users"

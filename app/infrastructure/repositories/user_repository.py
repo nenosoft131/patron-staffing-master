@@ -1,8 +1,8 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.interfaces.user_repository import IUserRepository
-from app.models.user import User as DomainUser
-from app.models.user_orm_model import UserORM  # SQLAlchemy model
+from app.domain.models.user import User as DomainUser
+from app.database.models.user_orm_model import UserORM  # SQLAlchemy model
 
 class UserSQLAlchemyRepository(IUserRepository):
     def __init__(self, session: AsyncSession):

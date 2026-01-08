@@ -3,9 +3,8 @@ from fastapi import FastAPI
 from app.api.routers import user
 from app.api.routers import status 
 from app.core.config import get_settings
-from app.db.session import init_db
+from app.database.session import init_db
 from contextlib import asynccontextmanager
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,6 +23,7 @@ def create_app() -> FastAPI:
         description="patron staffing backend",
         docs_url="/docs",      # Swagger
         redoc_url="/redoc",    # ReDoc
+        lifespan=lifespan 
     )
     
     routers = [

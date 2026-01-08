@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile
 from app.utils.dependencies import get_create_user_use_case
 from app.utils.create_user import CreateUser, CreateUserInput
 from app.api.schemas.auth import LoginInput, LoginOutput
@@ -36,3 +36,9 @@ async def read_current_user(current_user=Depends(get_current_user)):
         "role": current_user.role,
         "is_active": current_user.is_active
     }
+    
+@router.post("/upload")
+async def upload_document(
+    file : UploadFile, 
+):
+    print(file.filename)
