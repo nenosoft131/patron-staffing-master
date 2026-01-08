@@ -31,19 +31,23 @@ Built with **FastAPI**, **async SQLAlchemy**, and cloud-ready storage for high p
 
 ## 🏗️ Architecture
 
-patron-staffing-master/<br>
--app/ # Core application<br>-api/ # FastAPI routers, schemas, and dependency injection<br>-core/ # Core business logic & app configuration<br>-domain/ # Pure business entities<br>
-│ │ └ models/ # Domain models<br>
-│ ├ infrastructure/ # Adapters & external service implementations<br>
-│ │ ├ repositories/ # Database repository implementations<br>
-│ │ ├ services/ # External services (email, storage, etc.)<br>
-│ │ └ security/ # Authentication, password hashing, JWT<br>
-│ ├ interfaces/ # Abstract interfaces / ports for DI<br>
-│ └ utils/ # Helper utilities (file storage, logging, etc.)<br>
-├ tests/ # Unit, integration, and end-to-end tests<br>
-├ Dockerfile # Docker configuration<br>
-├ main.py # Application entry point / app factory<br>
-└ requirements.txt # Python dependencies<br>
+patron-staffing/
+
+- app/ # Core application
+  - api/ # FastAPI routers, schemas, and dependency injection
+  - core/ # Core business logic & application configuration
+  - domain/ # Pure business entities
+    - models/ # Domain models
+  - infrastructure/ # Adapters & external service implementations
+    - repositories/ # Database repository implementations
+    - services/ # External services (email, storage, etc.)
+    - security/ # Authentication, password hashing, JWT
+  - interfaces/ # Abstract interfaces / ports for dependency inversion
+  - utils/ # Helper utilities (file storage, logging, etc.)
+- tests/ # Unit, integration, and end-to-end tests
+- Dockerfile # Docker configuration
+- main.py # Application entry point / app factory
+- requirements.txt # Python dependencies
 
 ### 🔑 Design Principles
 
