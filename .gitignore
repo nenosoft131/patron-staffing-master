@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 myenv/
+test.db
 downloads/
 eggs/
 .eggs/

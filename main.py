@@ -4,6 +4,16 @@ from app.api.routers import user
 from app.api.routers import status 
 from app.core.config import get_settings
 from app.db.session import init_db
+from contextlib import asynccontextmanager
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await init_db()
+    print("Database initialized")
+    yield  
+    # Shutdown logic (optional)
+    print("Application shutting down")
 
 def create_app() -> FastAPI:
     # settings = get_settings()  # Loads .env, validates config
@@ -15,19 +25,16 @@ def create_app() -> FastAPI:
         docs_url="/docs",      # Swagger
         redoc_url="/redoc",    # ReDoc
     )
-
-    # 🔌 Mount routers (decoupled HTTP layer)
-    app.include_router(user.router)
-    app.include_router(status.router)
-    print("DONE")
-    # Optional: Add startup/shutdown events
-    @app.on_event("startup")
-    async def startup():
-        # e.g., test DB connection, warm cache
-        await init_db()
-        pass
-
+    
+    routers = [
+    user.router,
+    status.router
+    ]
+    
+    for r in routers:
+        app.include_router(r)
+        
     return app
 
-# 🚀 Create & export app for Uvicorn
+# Create app for Uvicorn
 app = create_app()

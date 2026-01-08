@@ -16,9 +16,8 @@ async def init_db():
     Initialize the database: create all tables if they don't exist.
     """
     async with engine.begin() as conn:
-        # run_sync ensures synchronous metadata creation works in async context
         await conn.run_sync(Base.metadata.create_all)
-    print("✅ Database initialized (tables created if missing)")
+    print(" Database initialized (tables created if missing)")
 
 # Run DB init
 if __name__ == "__main__":

@@ -17,6 +17,3 @@ class User:
     last_name: Optional[str] = None
     role: UserRole = UserRole.candidate
     is_active: bool = True
-
-    # Optional: add domain validation (e.g., enforce email format)
-    # But usually delegated to Pydantic DTOs earlier in the pipeline

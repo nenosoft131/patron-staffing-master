@@ -1,20 +1,8 @@
-from app.models.user import User, UserRole
-from app.api.interfaces.user_repository import IUserRepository
-from app.api.interfaces.password_hasher import IPasswordHasher
-from pydantic import BaseModel, EmailStr
-from typing import Optional
+from app.models.user import User
+from app.infrastructure.repositories.user_repository import IUserRepository
+from app.infrastructure.security.password_hasher import IPasswordHasher
+from app.api.schemas.user import CreateUserInput, CreateUserOutput
 
-class CreateUserInput(BaseModel):
-    email: EmailStr
-    password: str
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    role: UserRole = UserRole.candidate
-
-class CreateUserOutput(BaseModel):
-    id: int
-    email: str
-    role: UserRole
 
 class CreateUser:
     def __init__(
