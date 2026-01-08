@@ -1,18 +1,30 @@
-**Patron Staffing API**
-A modern, scalable backend for Patron Staffing Solutions — enabling role-based user management, secure document uploads, and candidate profile building for staffing, recruitment, and HR compliance.
+# Patron Staffing API
 
-✨ **Features**
-✅ Role-Based User Management: admin, client, candidate, staff
-✅ Secure Authentication: BCrypt password hashing, email uniqueness
-✅ Document Gateway: Upload resumes, certifications, IDs with type categorization
-✅ Candidate Profiles: Build skillset profiles linked to documents
-✅ Cloud-Ready Storage: S3/MinIO integration with signed URLs
-✅ Clean Architecture: Domain-Driven Design with low coupling
-✅ Async-First: Fully asynchronous I/O with SQLAlchemy 2.0 + asyncpg
-✅ Mobile & Web Ready: Consistent RESTful APIs with OpenAPI docs
-✅ Compliance-Ready: GDPR-compliant deletion, audit trails
+![Python](https://img.shields.io/badge/python-3.10+-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Production-green)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-🏗️ **Architecture**
+A **modern, scalable backend** for Patron Staffing Solutions — enabling **role-based user management**, **secure document uploads**, and **candidate profile building** for staffing, recruitment, and HR compliance.
+
+Built with **FastAPI**, **async SQLAlchemy**, and cloud-ready storage for high performance and scalability.
+
+---
+
+## ✨ Features
+
+- **Role-Based User Management**: Supports `admin`, `client`, `candidate`, and `staff` roles.
+- **Secure Authentication**: BCrypt password hashing with email uniqueness.
+- **Document Gateway**: Upload resumes, certifications, and IDs with type categorization.
+- **Candidate Profiles**: Build skillset profiles linked to uploaded documents.
+- **Cloud-Ready Storage**: S3/MinIO integration with signed URLs for secure access.
+- **Clean Architecture**: Domain-Driven Design (DDD) with low coupling.
+- **Async-First**: Fully asynchronous I/O using SQLAlchemy 2.0 + asyncpg.
+- **Mobile & Web Ready**: Consistent RESTful APIs with OpenAPI documentation.
+- **Compliance-Ready**: GDPR-compliant deletion and audit trails.
+
+---
+
+## 🏗️ Architecture
 
 patron-staffing-api/
 ├── app/ # 🧠 Core domain & use cases
@@ -30,37 +42,48 @@ patron-staffing-api/
 ├── main.py # App factory
 └── requirements.txt
 
-🔑 **Principles**
-Domain is pure — no FastAPI, SQLAlchemy, or cloud SDKs
-Adapters implement interfaces — swap DB/cloud without touching business logic
-Request-scoped sessions — safe async DB access
-Immutable domain models — thread-safe, testable entities
+### 🔑 Design Principles
 
-🛠️ **Quick Start**
-Python 3.10+
-PostgreSQL 12+ (or SQLite for dev)
-Docker (optional for MinIO)
+- **Pure Domain**: Business logic is framework-independent (no FastAPI, SQLAlchemy, or cloud SDK dependencies).
+- **Adapters Implement Interfaces**: Easily swap databases or cloud providers without touching business logic.
+- **Request-Scoped Sessions**: Safe async DB access for concurrency.
+- **Immutable Domain Models**: Thread-safe and testable entities.
 
-1.  **Clone & Install**
-    git clone https://github.com/your-org/patron-staffing-api.git
+---
+
+## 🛠️ Quick Start
+
+### Requirements
+
+- Python 3.10+
+- PostgreSQL 12+ (or SQLite for development)
+- Docker (optional, for MinIO)
+
+### Installation
+
+    bash
+    git clone https://github.com/nenosoft131/patron-staffing-api.git
     cd patron-staffing-api
     python -m venv venv
-    source venv/bin/activate # Linux/macOS # .\venv\Scripts\activate # Windows
+    source venv/bin/activate  # Linux/macOS
+    # .\venv\Scripts\activate # Windows
     pip install -r requirements.txt
 
-2.  **Configure Environment**
-    cp .env.example .env # Edit .env: # DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/patron_dev # MINIO_ENDPOINT=http://localhost:9000 # MINIO_ACCESS_KEY=patron # MINIO_SECRET_KEY=supersecret
+### Configuration
 
-3.  Start Services (Optional)
+    cp .env.example .env
+    # Edit .env:
+    # DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/patron_dev
+    # MINIO_ENDPOINT=http://localhost:9000
+    # MINIO_ACCESS_KEY=patron
+    # MINIO_SECRET_KEY=supersecret
 
-    # Start PostgreSQL + MinIO via Docker
+### Running the API
 
-        docker-compose up -d
-
-4.  **Run the API**
     uvicorn main:app --reload --port 8000
 
-🗺️ **Roadmap**
+### 📈 Roadmap
+
 Version Features
 v1.0 ✅ User management, document upload, candidate profiles
 v1.1 🔐 JWT auth, password reset, email verification
