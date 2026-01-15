@@ -19,3 +19,18 @@ class KafkaProducer:
             callback=self.delivery_report
         )
         self.producer.flush()  # Wait for message to be sent
+
+    def delivery_report(self, err, msg):
+        if err is not None:
+            print(f"Message delivery failed: {err}")
+        else:
+            print(f"Message delivered to {msg.topic()} [{msg.partition()}]")
+
+    def send_message(self, key: str, value: str):
+        self.producer.produce(
+            topic=self.topic,
+            key=key,
+            value=value,
+            callback=self.delivery_report
+        )
+        self.producer.flush()  # Wait for message to be s
