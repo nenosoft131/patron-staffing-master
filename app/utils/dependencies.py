@@ -1,9 +1,9 @@
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.session import get_async_db
-from app.infrastructure.repositories.user_repository import UserSQLAlchemyRepository
+from app.database.crud.user_crud import UserSQLAlchemyRepository
 from app.infrastructure.security.password_hasher import BcryptPasswordHasher
-from app.utils.create_user import CreateUser
+from app.infrastructure.services.create_user import CreateUser
 from app.interfaces.user_repository import IUserRepository
 from app.interfaces.password_hasher import IPasswordHasher
 from app.infrastructure.services.login_user import LoginUser

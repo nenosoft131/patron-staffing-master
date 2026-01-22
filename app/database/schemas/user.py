@@ -1,7 +1,6 @@
-# app/domain/models/user.py
-from dataclasses import dataclass
-from enum import Enum
+from pydantic import BaseModel, EmailStr
 from typing import Optional
+from enum import Enum
 
 class UserRole(str, Enum):
     admin = "admin"
@@ -9,11 +8,20 @@ class UserRole(str, Enum):
     candidate = "candidate"  # job seeker
     staff = "staff"        # internal staffing agent
 
-@dataclass(frozen=True)
-class User:
-    email: str
-    password_hash: str  
+class UserBase(BaseModel):
+    email: EmailStr
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     role: UserRole = UserRole.candidate
-    is_active: bool = True
+    is_active: bool
+
+
+class CreateUserInput(UserBase):
+    password_hash: str
+
+
+class UserOutput(UserBase):
+    id: int
+
+    class Config:
+        from_attributes = True 

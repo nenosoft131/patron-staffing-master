@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, String, Enum, Boolean, DateTime
 from sqlalchemy.sql import func
 from app.database.models.base import Base
-from app.domain.models.user import UserRole  # reuse domain enum!
+from app.database.schemas.user import UserRole
 
 class UserORM(Base):
     __tablename__ = "users"
