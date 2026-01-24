@@ -12,7 +12,7 @@ class LoginUser:
 
     async def execute(self, input: LoginInput) -> LoginOutput:
         user = await self.user_repo.get_by_email(input.email)
-        if not user or not self.password_hasher.verify(input.password, user.password_hash):
+        if not user or not self.password_hasher.verify(input.password, user.hashed_password):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
 
         token_data = {"sub": user.email, "role": user.role}

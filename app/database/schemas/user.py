@@ -1,6 +1,8 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from enum import Enum
+from pydantic import ConfigDict
+
 
 class UserRole(str, Enum):
     admin = "admin"
@@ -22,6 +24,4 @@ class CreateUserInput(UserBase):
 
 class UserOutput(UserBase):
     id: int
-
-    class Config:
-        from_attributes = True 
+    model_config = ConfigDict(from_attributes=True)
