@@ -43,7 +43,3 @@ async def upload_document(
     file : UploadFile, 
 ):
     print(file.filename)
-
-@router.get("/test")
-async def test():
-    return {"res":"OK"}

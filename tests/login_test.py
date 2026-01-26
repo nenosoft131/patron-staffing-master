@@ -1,4 +1,5 @@
 import pytest
+from http import HTTPStatus
 from app.helper.utils import calcaulte_eligibility
 from fastapi.testclient import TestClient
 from main import app
@@ -15,7 +16,21 @@ from main import app
     
 client = TestClient(app)
 
-def test_create_user():
+def test_api():
     response = client.get("/users/test")
     assert response.status_code == 200
     assert response.json() == {'res': 'OK'}
+
+def test_create_user():
+    
+    payload = {
+            'email' : 'usmanbutt@usman.com',
+            'first_name' : 'BUTT',
+            'last_name' : 'Muhammad Usman',
+            'role' : 'staff',
+            'is_active' : True,
+            'password_hash' : 'abcd'
+    }
+    response = client.post("/users/", json=payload)
+    
+    assert response.status_code == HTTPStatus.CREATED

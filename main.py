@@ -1,10 +1,11 @@
 # main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from app.api.routers import user
 from app.api.routers import status 
 from app.core.config import get_settings
 from app.database.session import init_db
 from contextlib import asynccontextmanager
+from fastapi.responses import JSONResponse
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -38,3 +39,10 @@ def create_app() -> FastAPI:
 
 # Create app for Uvicorn
 app = create_app()
+
+@app.exception_handler(Exception)
+async def getex(req : Request , er : Exception):
+    return JSONResponse(
+        status_code =200,
+        content= {'response' :str(er)} 
+    )
