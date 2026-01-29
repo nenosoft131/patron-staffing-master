@@ -6,6 +6,7 @@ from app.core.config import get_settings
 from app.database.session import init_db
 from contextlib import asynccontextmanager
 from fastapi.responses import JSONResponse
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -14,6 +15,7 @@ async def lifespan(app: FastAPI):
     yield  
     # Shutdown logic (optional)
     print("Application shutting down")
+
 
 def create_app() -> FastAPI:
     # settings = get_settings()  # Loads .env, validates config
@@ -39,6 +41,9 @@ def create_app() -> FastAPI:
 
 # Create app for Uvicorn
 app = create_app()
+
+#adding middelware
+app.add_middleware(TrustedHostMiddleware(allowed_hosts= ['*']))
 
 @app.exception_handler(Exception)
 async def getex(req : Request , er : Exception):
