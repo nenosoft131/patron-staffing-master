@@ -7,6 +7,7 @@ from app.database.session import init_db
 from contextlib import asynccontextmanager
 from fastapi.responses import JSONResponse
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from app.middleware.http_middleware import http_middelwar
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -44,6 +45,8 @@ app = create_app()
 
 #adding middelware
 app.add_middleware(TrustedHostMiddleware(allowed_hosts= ['*']))
+app.middleware('http')(http_middelwar)
+
 
 @app.exception_handler(Exception)
 async def getex(req : Request , er : Exception):
