@@ -1,23 +1,24 @@
-from fastapi import Request
+from fastapi import Request, HTTPException
 from fastapi.responses import JSONResponse
-# import logging
-
-# logger = logging.getLogger(__name__)
 
 
 class GlobalExceptionHandler:
     @staticmethod
-    async def handle_exception(request: Request, exc: Exception):
-        # logger.error(
-        #     f"Unhandled exception: {exc}",
-        #     exc_info=True
-        # )
+    async def handle_http_exception(request: Request, exc: HTTPException):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={
+                "success": False,
+                "message": exc.detail
+            }
+        )
 
+    @staticmethod
+    async def handle_exception(request: Request, exc: Exception):
         return JSONResponse(
             status_code=500,
             content={
                 "success": False,
-                "message": "Internal Server Error",
-                "detail": str(exc)  # remove in production if needed
+                "message": "Internal Server Error"
             }
         )
