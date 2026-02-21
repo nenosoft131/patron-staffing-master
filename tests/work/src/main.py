@@ -20,7 +20,7 @@ def read_csv(filepath:str)->None:
 
 def main():
     read_csv(PATH)
-    l = [user.account_id for user in users if user.success=='False']
+    l = [user for user in users if user.success=='False']
     
     counter = Counter(l)
     c = counter.most_common(2)
