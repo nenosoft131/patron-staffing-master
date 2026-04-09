@@ -8,7 +8,6 @@ BCRYPT_ROUNDS: Final[int] = 12
 
 
 class BcryptPasswordHasher(IPasswordHasher):
-   
     def hash(self, password: str) -> str:
         if not isinstance(password, str):
             raise TypeError("Password must be a string")
@@ -16,11 +15,11 @@ class BcryptPasswordHasher(IPasswordHasher):
             raise ValueError("Password too long (>1024 chars)")
 
         pwd_bytes = password.encode("utf-8")
-        
+
         # Hash with salt
         salt = bcrypt.gensalt(rounds=BCRYPT_ROUNDS)
         hashed = bcrypt.hashpw(pwd_bytes, salt)
-        
+
         return hashed.decode("utf-8")
 
     def verify(self, plain_password: str, hashed_password: str) -> bool:
@@ -30,7 +29,7 @@ class BcryptPasswordHasher(IPasswordHasher):
         try:
             plain_bytes = plain_password.encode("utf-8")
             hash_bytes = hashed_password.encode("utf-8")
-            
+
             return bcrypt.checkpw(plain_bytes, hash_bytes)
         except (ValueError, TypeError):
             return False
