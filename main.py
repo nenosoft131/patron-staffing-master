@@ -7,7 +7,8 @@ from app.database.session import init_db
 from contextlib import asynccontextmanager
 from fastapi.responses import JSONResponse
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from app.middleware.http_middleware import http_middelwar
+from app.middleware.http_middleware import http_middleware
+import uvicorn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -44,8 +45,8 @@ def create_app() -> FastAPI:
 app = create_app()
 
 #adding middelware
-app.add_middleware(TrustedHostMiddleware(allowed_hosts= ['*']))
-app.middleware('http')(http_middelwar)
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=['*'])
+app.middleware('http')(http_middleware)
 
 
 @app.exception_handler(Exception)
@@ -53,4 +54,11 @@ async def getex(req : Request , er : Exception):
     return JSONResponse(
         status_code =200,
         content= {'response' :str(er)} 
+    )
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",  # file_name:app_instance
+        host="0.0.0.0",
+        port=8000,
+        reload=False,  # remove in production
     )
